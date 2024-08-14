@@ -12,6 +12,6 @@ blocks:
           commands:
             - checkout
             - artifact pull workflow hello.bin
-            - '#gh release create v1.0.0 hello.bin --latest -t "$SEMAPHORE_GIT_TAG_NAME" -n "Continuous Delivery Release: $SEMAPHORE_GIT_TAG_NAME"'
+            - 'gh release create v1.0.0 hello.bin --latest -t "$SEMAPHORE_GIT_TAG_NAME" -n "Continuous Delivery Release: $SEMAPHORE_GIT_TAG_NAME"'
       secrets:
         - name: gh-tomfern-hello-go
