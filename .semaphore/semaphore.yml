@@ -1,5 +1,5 @@
 version: v1.0
-name: Go
+name: Continuous Integration Pipeline
 agent:
   machine:
     type: e1-standard-2
@@ -32,3 +32,8 @@ blocks:
             - go test -v
     dependencies:
       - Build
+promotions:
+  - name: Release
+    pipeline_file: pipeline_3.yml
+    auto_promote:
+      when: branch = 'main' AND result = 'passed' AND tag =~ '.*'
