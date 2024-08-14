@@ -15,7 +15,7 @@ blocks:
       jobs:
         - name: go build
           commands:
-            - go build -o hello main.go
+            - go build -o hello.bin main.go
             - artifact push workflow --force hello.bin
       env_vars:
         - name: GOOS
