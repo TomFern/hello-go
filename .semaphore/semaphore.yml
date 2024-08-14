@@ -10,10 +10,17 @@ global_job_config:
       - sem-version go 1.22
       - checkout
 blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: go build
+          commands:
+            - go build -o hello main.go
+            - artifact push workflow --force hello
   - name: Test
     task:
       jobs:
         - name: go test
           commands:
-            - go build -o hello main.go
+            - artifact pull workflow hello
             - go test -v
