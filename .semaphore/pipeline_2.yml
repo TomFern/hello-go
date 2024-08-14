@@ -1,0 +1,15 @@
+version: v1.0
+name: Continuous Delivery Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Release
+    task:
+      jobs:
+        - name: gh release
+          commands:
+            - checkout
+            - artifact pull workflow hello.bin
+            - '#gh release create v1.0.0 hello.bin --latest -t "v1.0.0" -n "Continuous Delivery Release"'

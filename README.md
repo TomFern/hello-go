@@ -14,6 +14,11 @@ Let CI/CD build, create artifacts
 
 ### Publish to GH
 
+export GH_TOKEN=(see .env)
+gh release create v1.0.1 hello.bin --latest -t "v1.0.1" -n "Continuous Delivery Release"
+
+Version got from tag
+
 ```shell
 gh auth login
 gh release create v1.0.0 \
