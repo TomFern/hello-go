@@ -1,0 +1,19 @@
+version: v1.0
+name: Go
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  prologue:
+    commands:
+      - sem-version go 1.22
+      - checkout
+blocks:
+  - name: Test
+    task:
+      jobs:
+        - name: go test
+          commands:
+            - go build -o hello main.go
+            - go test -v
