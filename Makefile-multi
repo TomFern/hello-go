@@ -1,0 +1,32 @@
+# Makefile for Hello World Go HTTP Server
+# Variables
+BINARY_NAME=http-hello-world
+VERSION=1.0.0
+
+# Build the binary for different platforms
+build:
+	GOOS=linux GOARCH=amd64 go build -o $(BINARY_NAME)-linux main.go
+	GOOS=darwin GOARCH=amd64 go build -o $(BINARY_NAME)-darwin main.go
+	GOOS=windows GOARCH=amd64 go build -o $(BINARY_NAME)-windows.exe main.go
+	@echo "Built binaries for Linux, macOS, and Windows"
+
+# Run tests
+test:
+	@go test -v
+	@echo "Tests completed"
+
+# Clean up build artifacts
+clean:
+	@rm -f $(BINARY_NAME)-*
+	@echo "Cleaned up"
+
+# Run the HTTP server
+run: build
+	@./$(BINARY_NAME)-linux
+
+# Package binaries for release
+package: build
+	@tar -czvf $(BINARY_NAME)-$(VERSION)-linux.tar.gz $(BINARY_NAME)-linux
+	@tar -czvf $(BINARY_NAME)-$(VERSION)-darwin.tar.gz $(BINARY_NAME)-darwin
+	@zip $(BINARY_NAME)-$(VERSION)-windows.zip $(BINARY_NAME)-windows.exe
+	@echo "Packaged binaries for release"
