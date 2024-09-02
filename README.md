@@ -30,3 +30,6 @@ gh release create v1.0.0 \
   --title "v1.0.0" \
   --notes "Release notes describing what’s new in this release."
 ```
+
+export T=$SEMAPHORE_WORKFLOW_ID
+gh release create "$T" --latest -t  "$T" -n "Continuous Delivery Release: $T"
