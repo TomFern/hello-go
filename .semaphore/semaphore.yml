@@ -16,19 +16,12 @@ blocks:
         - name: go build
           commands:
             - go build -o hello.bin main.go
-            - artifact push workflow --force hello.bin
+            - '#artifact push workflow --force hello.bin'
+            - '#artifact pull workflow hello.bin'
+            - go test -v
       env_vars:
         - name: GOOS
           value: linux
         - name: GOARCH
           value: amd64
     dependencies: []
-  - name: Test
-    task:
-      jobs:
-        - name: go test
-          commands:
-            - artifact pull workflow hello.bin
-            - go test -v
-    dependencies:
-      - Build
