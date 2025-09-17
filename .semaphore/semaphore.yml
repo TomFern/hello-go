@@ -32,8 +32,3 @@ blocks:
             - go test -v
     dependencies:
       - Build
-promotions:
-  - name: Release
-    pipeline_file: pipeline_2.yml
-    auto_promote:
-      when: result = 'passed' AND tag =~ '.*'
